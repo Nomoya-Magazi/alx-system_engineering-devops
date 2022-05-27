@@ -1,2 +1,2 @@
 #!/bin/bash
-echo mkdir
+mkdir /tmp/my_first_directory
