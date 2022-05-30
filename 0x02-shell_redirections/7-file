@@ -2,5 +2,5 @@
 <<<<<<< HEAD
 Best School
 =======
-echo "Best School"> \*\\'"Best School"\'\\*$\?\*\*\*\*\*:)"
+echo -e "Best School" > "\*\\\\'\"Best School\"\\'\\\\*$\\?\\*\\*\\*\\*\\*:)"
 >>>>>>> 3f9ccf086cec9c2ddffc9419f3c37ad73c430038
