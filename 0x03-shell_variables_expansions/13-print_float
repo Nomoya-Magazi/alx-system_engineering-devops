@@ -1,2 +1,2 @@
 #!/bin/bash
-printf"%"\n" $DECIMAL
+printf "%.2f" $NUM | sort
