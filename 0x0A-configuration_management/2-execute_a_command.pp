@@ -1,6 +1,6 @@
-# a manifests that terminates a process called killmenow
+# kill process killmenow
 
- exec { 'pkill':
+exec { 'pkill':
   command  => 'pkill killmenow',
   provider => 'shell',
 }
