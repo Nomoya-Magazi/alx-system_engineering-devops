@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 #!/usr/bin/env bash
 #configure my SSH file
 
 Host *
 IdentityFile ~/.ssh/school
 PasswordAuthentication no
-=======
-
->>>>>>> 747f23d418075a6a865508e40bf7203748ec71e1
