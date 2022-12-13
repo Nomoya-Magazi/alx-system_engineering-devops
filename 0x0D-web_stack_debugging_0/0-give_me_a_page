@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# get Apache running in the container
+
+package {'Apache':
+ensure => 'installed and running',
+content=> 'Hellow Holberton',
+}
