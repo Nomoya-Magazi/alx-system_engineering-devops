@@ -16,7 +16,7 @@ mode http
 balance roundrobin
 option httpclose
 option forwardfor
-server 50598-web-01 35.174.204.127:80 check
+server 50698-web-01 35.174.204.127:80 check
 server 50698-web-02 100.25.46.54:80 check
 " >> /etc/haproxy/haproxy.cfg
 
