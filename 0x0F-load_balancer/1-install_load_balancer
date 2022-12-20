@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
-# configures a new HAproxy as a load balancer
+# Installs and setup haproxy
 
-# Install HAproxy on a server
+sudo apt-get install --no-install-recommends software-properties-common
+sudo add-apt-repository ppa:vbernat/haproxy-2.7
 apt-get -y update
-apt-get -y install haproxy=2.7.\*
+sudo apt-get install haproxy=2.7.\*
 
-# Configure haproxy configuration file to distribute requests using a roundrobin algorithm
-echo '
-frontend nomoya.tech
-        bind 0:80
-        default_backend web_servers
-backend web_servers
-        balance roundrobin
-        server 50698-web-01 35.174.204.127:80
-        server 50698-web-02 100.25.46.54:80
-' >> /etc/haproxy/haproxy.cfg
+echo "ENABLED=1" > /etc/default/haproxy
 
-# Restart HAproxy service
-service haproxy restart
+# Listen to web1 and web2 servers
+echo "
+listen load_balancer
+bind *:80
+mode http
+balance roundrobin
+option httpclose
+option forwardfor
+server 50598-web-01 35.174.204.127:80 check
+server 50698-web-02 100.25.46.54:80 check
+" >> /etc/haproxy/haproxy.cfg
+
+service haproxy start
