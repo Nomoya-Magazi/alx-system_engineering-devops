@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Script that makes loader inform about subdomains
+Usage: ./0-world_wide_web <domain> <subdomain>
 if [ $# -eq 1 ]
 then
     dom="www.$1 lb-01.$1 web-01.$1 web-02.$1"
