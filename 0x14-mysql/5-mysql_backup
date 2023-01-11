@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# This bash script generates a MySQL dump and creates a compressed archive out of it.
+#This bash script generates a MySQL dump and creates a compressed archive out of it.
+
 mysqldump -uroot -p"$1" --all-databases > backup.sql
 
 #specify achive name format
