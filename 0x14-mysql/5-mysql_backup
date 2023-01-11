@@ -6,4 +6,4 @@ mysqldump -uroot -p"$1" --all-databases > backup.sql
 format=$(date'+%d-%m-%Y')
 
 #archive(zip)file
-tar -czvf"$format.tar.gz"backup.sql
+tar -czvf"$format.tar.gz" backup.sql
