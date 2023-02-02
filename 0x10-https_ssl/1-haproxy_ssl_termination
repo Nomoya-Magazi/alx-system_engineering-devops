@@ -40,6 +40,7 @@ defaults
          acl letsencrypt-acl path_beg /.well-known/acme-challenge/
          use_backend letsencrypt-backend if letsencrypt-acl
          default_backend webservers
+         
          frontend http
          bind *:80
          redirect scheme https code 301 if !{ ssl_fc }
@@ -51,15 +52,3 @@ defaults
          server 50698-web-02 100.25.167.60:80 check
          backend letsencrypt-backend
          server letsencrypt 127.0.0.1:54321
-
-
-frontend nomoya.tech
-        bind *:80
-        bind *:443 ssl crt /etc/haproxy/certs/nomoya.tech.pem
-        mode http
-        default_backend web_servers
-
-backend web_servers
-        balance roundrobin
-        server 50698-web-01 35.174.204.127:80 check
-        server 50698-web-02 100.25.46.54:80 check
