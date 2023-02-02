@@ -7,6 +7,8 @@ global
         user haproxy
         group haproxy
         daemon
+        maxconn 2048
+        tune.ssl.default-dh-param 2048
 
 
         # See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3&config=intermediate
@@ -29,6 +31,26 @@ defaults
         errorfile 502 /etc/haproxy/errors/502.http
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
+        option forwardfor
+        option http-server-close
+        
+        # To the Frontend
+        frontend https
+         bind *:443 ssl crt /etc/haproxy/certs/www.nomoya.tech.pem
+         acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+         use_backend letsencrypt-backend if letsencrypt-acl
+         default_backend webservers
+         frontend http
+         bind *:80
+         redirect scheme https code 301 if !{ ssl_fc }
+         
+         # To the backend
+         backend webservers
+         balance roundrobin
+         server 50698-web-01 54.160.122.220:80 check
+         server 50698-web-02 100.25.167.60:80 check
+         backend letsencrypt-backend
+         server letsencrypt 127.0.0.1:54321
 
 
 frontend nomoya.tech
