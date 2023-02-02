@@ -7,6 +7,8 @@ global
         user haproxy
         group haproxy
         daemon
+        maxconn 2048
+        tune.ssl.default-dh-param 2048
         
        # Default SSL material locations
         ca-base /etc/ssl/certs
@@ -32,14 +34,24 @@ defaults
         errorfile 502 /etc/haproxy/errors/502.http
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
+        option forwardfor
+        option http-server-close
 
-frontend
-    bind *:80
-    bind *:443 ssl crt /etc/haproxy/certs/www.nomoya.tech.pem
-    redirect scheme https if !{ ssl_fc }
-    default_backend webservers
+frontend nomoya.tech-http-frontend
+        bind     *:80
+        redirect scheme https code 301 if !{ ssl_fc }
+        http-request set-header X-Forwarded-Proto http
+        default_backend  nomoya.tech-backend
+frontend https-frontend
+        bind *:443 ssl crt /etc/haproxy/certs/www.nomoya.tech.pem
+        reqadd X-Forwarded-Proto:\ https
+        acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+        use_backend letsencrypt-backend if letsencrypt-acl
+        default_backend nomoya.tech-backend
 
-backend
+backend nomoya.tech-backend
     balance roundrobin
     server 50698-web-01 54.160.122.220:80 check
     server 50698-web-02 100.25.167.60:80 check
+backend letsencrypt-backend
+   server letsencrypt 127.0.0.1:54321
