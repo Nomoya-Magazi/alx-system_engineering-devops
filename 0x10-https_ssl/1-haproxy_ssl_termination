@@ -14,7 +14,10 @@ global
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
 
-        # See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3>        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GC>        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA38>        ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
+        # See: https://ssl-config.mozilla.org/#server=haproxy&server-version=2.0.3>
+        ssl-default-bind-ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GC>
+        ssl-default-bind-ciphersuites TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA38>
+        ssl-default-bind-options ssl-min-ver TLSv1.2 no-tls-tickets
 
 defaults
         log     global
