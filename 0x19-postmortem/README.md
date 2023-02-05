@@ -28,3 +28,7 @@ Requirements:
 While postmortem format can vary, stick to this one so that you can get properly reviewed by your peers.
 
 Please, remember that these blogs must be written in English to further your technical ability in a variety of settings.
+
+Please use link below to get access to the postmortem 
+
+https://docs.google.com/document/d/16U8Nt3sznC6eMbD-998CQS9GYGL6pw2Wsp2BR117r-U/edit?usp=sharing
