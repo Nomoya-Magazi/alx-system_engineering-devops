@@ -1,3 +1,5 @@
+# Configures Nginx to serve the /number_odd_or_even/ route on AirBnB_clone_v2.
+
 server {
    listen 80 default_server;
    listen [::]:80 default_server;
