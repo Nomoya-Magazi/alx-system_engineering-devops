@@ -4,12 +4,12 @@ server {
         listen 80 default_server;
         listen [::]:80 default_server;
 
-        server_name 54.160.122.220;
+        server_name 3.84.238.247;
 
         root /var/www/html;
         index index.html index.htm index.nginx-debian.html;
 
-        add_header X-Served-By 'web-01';
+        add_header X-Served-By $HOSTNAME;
 
         error_page 404 /error404.html;
         location = /error404.html {
@@ -34,13 +34,7 @@ server {
                 proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
         }
 
-        location /api/ {
+        location /api {
                 proxy_pass http://localhost:5002/api/;
-        }
-         location / {
-                proxy_pass http://127.0.0.1:5003/2-hbnb;
-        }
-        location /static {
-                proxy_pass http://127.0.0.1:5003;
-        }
+        }	
 }
